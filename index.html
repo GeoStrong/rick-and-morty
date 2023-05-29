@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/normalize.css">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/media.css">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <script defer src="./scripts/main.js" type="module"></script>
+  <script defer src="./scripts/details.js" type="module"></script>
+  <title>Rick and Morty</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="header__nav">
+        <div class="header__logo">
+          <img src="./images/logo.svg" alt="logo">
+        </div>
+        <div class="header__menu">
+          <ul class="list-reset header__list">
+            <li class="header__item"><a href="#character" class="header__link">Characters</a>
+            </li>
+            <li class="header__item"><a href="#location" class="header__link">Locations</a></li>
+            <li class="header__item"><a href="#episode" class="header__link">Episodes</a></li>
+          </ul>
+        </div>
+        <div class="hamburger">
+          <button class="btn-reset hamburger__btn hamburger__btn--open">
+            <svg viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <title>Menu</title>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Menu">
+                    <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="24" height="24"> </rect>
+                    <line x1="5" y1="7" x2="19" y2="7" id="Path" stroke="#0C0310" stroke-width="2"
+                      stroke-linecap="round"> </line>
+                    <line x1="5" y1="17" x2="19" y2="17" id="Path" stroke="#0C0310" stroke-width="2"
+                      stroke-linecap="round"> </line>
+                    <line x1="5" y1="12" x2="19" y2="12" id="Path" stroke="#0C0310" stroke-width="2"
+                      stroke-linecap="round"> </line>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <button class="btn-reset hamburger__btn hamburger__btn--close hidden">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Menu / Close_MD">
+                  <path id="Vector" d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#ffffff" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+              </g>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="menu"></div>
+  </header>
+  <main class="main">
+    <div class="container">
+      <section class="section">
+        <div class="section__image section__child ">
+          <img src="./images/character-image.png" class="character-image" alt="character-image">
+          <img src="./images/location-image.png" class="location-image hidden" alt="location-image">
+          <img src="./images/episode-image.png" class="episode-image hidden" alt="episode-image">
+        </div>
+        <div class="section-character__back">
+          <button class="btn-reset section-character__btn back hidden">
+            <span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="black" />
+              </svg>
+            </span> GO BACK
+          </button>
+        </div>
+        <div class="section__filter section__child ">
+          <div class="section-filter__container">
+            <input class="section-filter__element filter-name" placeholder="Filter by name..." type="text">
+            <select class="section-filter__element filter-species">
+              <option class="section__option" value="Species" disabled selected>Species</option>
+              <option class="section__option" value="Human">Human</option>
+              <option class="section__option" value="Humanoid">Humanoid</option>
+              <option class="section__option" value="Alien">Alien</option>
+              <option class="section__option" value="unknown">Unknown</option>
+              <option class="section__option" value="Poopybutthole">Poopybutthole</option>
+              <option class="section__option" value="Mythological Creature">Mythological Creature</option>
+              <option class="section__option" value="Animal">Animal</option>
+              <option class="section__option" value="Cronenberg">Cronenberg</option>
+              <option class="section__option" value="Robot">Robot</option>
+              <option class="section__option" value="Disease">Disease</option>
+            </select>
+            <select class="section-filter__element filter-gender">
+              <option class="section__option" value="Gender" disabled selected>Gender</option>
+              <option class="section__option" value="male">Male</option>
+              <option class="section__option" value="female">Female</option>
+              <option class="section__option" value="genderless">Genderless</option>
+              <option class="section__option" value="unknown">Unknown</option>
+            </select>
+            <select class="section-filter__element filter-status">
+              <option class="section__option" value="Status" disabled selected>Status</option>
+              <option class="section__option" value="alive">Alive</option>
+              <option class="section__option" value="dead">Dead</option>
+              <option class="section__option" value="unknown">Unknown</option>
+            </select>
+            <select class="section-filter__element filter-type hidden">
+              <option class="section__option" value="Type" disabled selected>Type</option>
+              <option class="section__option" value="Planet">Planet</option>
+              <option class="section__option" value="Cluster">Cluster</option>
+              <option class="section__option" value="Space station">Space station</option>
+              <option class="section__option" value="Microverse">Microverse</option>
+              <option class="section__option" value="TV">TV</option>
+              <option class="section__option" value="Resort">Resort</option>
+              <option class="section__option" value="Fantasy town">Fantasy town</option>
+              <option class="section__option" value="Dream">Dream</option>
+              <option class="section__option" value="Menagerie">Menagerie</option>
+              <option class="section__option" value="Game">Game</option>
+              <option class="section__option" value="Customs">Customs</option>
+              <option class="section__option" value="Daycare">Daycare</option>
+              <option class="section__option" value="Dwarf planet (Celestial Dwarf)">Dwarf planet (Celestial Dwarf)
+              </option>
+              <option class="section__option" value="Teenyverse">Teenyverse</option>
+              <option class="section__option" value="Box">Box</option>
+              <option class="section__option" value="Spacecraft">Spacecraft</option>
+              <option class="section__option" value="Artificially generated world">Artificially generated world</option>
+              <option class="section__option" value="Machine">Machine</option>
+              <option class="section__option" value="Arcade">Arcade</option>
+              <option class="section__option" value="Spa">Spa</option>
+              <option class="section__option" value="Quadrant">Quadrant</option>
+              <option class="section__option" value="Quasar">Quasar</option>
+              <option class="section__option" value="Liquid">Liquid</option>
+              <option class="section__option" value="Convention">Convention</option>
+              <option class="section__option" value="Mount">Mount</option>
+              <option class="section__option" value="Woods">Woods</option>
+              <option class="section__option" value="Diegesis">Diegesis</option>
+              <option class="section__option" value="Non-Diegetic Alternative Reality">Non-Diegetic Alternative Reality
+              </option>
+              <option class="section__option" value="Nightmare">Nightmare</option>
+              <option class="section__option" value="Asteroid">Asteroid</option>
+              <option class="section__option" value="Acid Plant">Acid Plant</option>
+              <option class="section__option" value="Dimension">Dimension</option>
+              <option class="section__option" value="Reality">Reality</option>
+              <option class="section__option" value="Death Star">Death Star</option>
+              <option class="section__option" value="Base">Base</option>
+              <option class="section__option" value="Elemental Rings">Elemental Rings</option>
+              <option class="section__option" value="Human">Human</option>
+              <option class="section__option" value="Space">Space</option>
+              <option class="section__option" value="Hell">Hell</option>
+              <option class="section__option" value="Police Department">Police Department</option>
+              <option class="section__option" value="Country">Country</option>
+              <option class="section__option" value="Consciousness">Consciousness</option>
+              <option class="section__option" value="Memory">Memory</option>
+            </select>
+            <select class="section-filter__element filter-dimension hidden">
+              <option class="section__option" value="Type" disabled selected>Dimension</option>
+              <option class="section__option" value="Dimension C-137">Dimension C-137</option>
+              <option class="section__option" value="unknown">unknown</option>
+              <option class="section__option" value="Post-Apocalyptic Dimension">Post-Apocalyptic Dimension</option>
+              <option class="section__option" value="Replacement Dimension">Replacement Dimension</option>
+              <option class="section__option" value="Cronenberg Dimension">Cronenberg Dimension</option>
+              <option class="section__option" value="Fantasy Dimension">Fantasy Dimension</option>
+              <option class="section__option" value="Dimension 5-126">Dimension 5-126</option>
+              <option class="section__option" value="Cromulon Dimension">Cromulon Dimension</option>
+              <option class="section__option" value="Dimension C-500A">Dimension C-500A</option>
+              <option class="section__option" value="Dimension K-83">Dimension K-83</option>
+              <option class="section__option" value="Eric Stoltz Mask Dimension">Eric Stoltz Mask Dimension</option>
+              <option class="section__option" value="Evil Rick's Target Dimension">Evil Rick's Target Dimension</option>
+              <option class="section__option" value="Giant Telepathic Spiders Dimension">Giant Telepathic Spiders
+                Dimension</option>
+              <option class="section__option" value="Unknown dimension">Unknown dimension</option>
+              <option class="section__option" value="Dimension K-22">Dimension K-22</option>
+              <option class="section__option" value="Dimension D-99">Dimension D-99</option>
+              <option class="section__option" value="Dimension D716">Dimension D716</option>
+              <option class="section__option" value="Dimension D716-B">Dimension D716-B</option>
+              <option class="section__option" value="Dimension D716-C">Dimension D716-C</option>
+              <option class="section__option" value="Dimension J-22">Dimension J-22</option>
+              <option class="section__option" value="Dimension C-35">Dimension C-35</option>
+              <option class="section__option" value="Pizza Dimension">Pizza Dimension</option>
+              <option class="section__option" value="Phone Dimension">Phone Dimension</option>
+              <option class="section__option" value="Chair Dimension">Chair Dimension</option>
+              <option class="section__option" value="Fascist Dimension">Fascist Dimension</option>
+              <option class="section__option" value="Fascist Shrimp Dimension">Fascist Shrimp Dimension</option>
+              <option class="section__option" value="Fascist Teddy Bear Dimension">Fascist Teddy Bear Dimension</option>
+              <option class="section__option" value="Wasp Dimension">Wasp Dimension</option>
+              <option class="section__option" value="Tusk Dimension">Tusk Dimension</option>
+              <option class="section__option" value="Magic Dimension">Magic Dimension</option>
+              <option class="section__option" value="Merged Dimension">Merged Dimension</option>
+            </select>
+            <input class="section-filter__element filter-episode hidden" placeholder="Filter by episode..." type="text">
+          </div>
+        </div>
+        <div class="section__content section__child ">
+          <div class="section-content__container">
+          </div>
+          <div class="section__buttons">
+            <button class="btn-reset section__btn  previous">Previous</button>
+            <button class="btn-reset section__btn more">Load More</button>
+            <button class="btn-reset section__btn less">Show Less</button>
+            <button class="btn-reset section__btn next">Next</button>
+          </div>
+        </div>
+        <div class="section-resource__container"></div>
+      </section>
+    </div>
+    </div>
+  </main>
+  <div class="overlay"></div>
+  <script src="./scripts/burger.js"></script>
+</body>
+
+</html>
