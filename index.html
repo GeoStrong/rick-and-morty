@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/normalize.css">
-  <link rel="stylesheet" href="./styles/style.css">
-  <link rel="stylesheet" href="./styles/media.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- <link rel="stylesheet" href="./css/media.css"> -->
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@700&family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet">
   <script defer src="./scripts/main.js" type="module"></script>
@@ -86,10 +86,10 @@
             </span> GO BACK
           </button>
         </div>
-        <div class="section__filter section__child ">
+        <div class="section-filter section__child ">
           <div class="section-filter__container">
-            <input class="section-filter__element filter-name" placeholder="Filter by name..." type="text">
-            <select class="section-filter__element filter-species">
+            <input class="section-filter__element filter-name" placeholder="Filter by name..." id="name" type="text">
+            <select class="section-filter__element filter-species" id="species">
               <option class="section__option" value="Species" disabled selected>Species</option>
               <option class="section__option" value="Human">Human</option>
               <option class="section__option" value="Humanoid">Humanoid</option>
@@ -102,20 +102,20 @@
               <option class="section__option" value="Robot">Robot</option>
               <option class="section__option" value="Disease">Disease</option>
             </select>
-            <select class="section-filter__element filter-gender">
+            <select class="section-filter__element filter-gender" id="gender">
               <option class="section__option" value="Gender" disabled selected>Gender</option>
               <option class="section__option" value="male">Male</option>
               <option class="section__option" value="female">Female</option>
               <option class="section__option" value="genderless">Genderless</option>
               <option class="section__option" value="unknown">Unknown</option>
             </select>
-            <select class="section-filter__element filter-status">
+            <select class="section-filter__element filter-status" id="status">
               <option class="section__option" value="Status" disabled selected>Status</option>
               <option class="section__option" value="alive">Alive</option>
               <option class="section__option" value="dead">Dead</option>
               <option class="section__option" value="unknown">Unknown</option>
             </select>
-            <select class="section-filter__element filter-type hidden">
+            <select class="section-filter__element filter-type hidden" id="type">
               <option class="section__option" value="Type" disabled selected>Type</option>
               <option class="section__option" value="Planet">Planet</option>
               <option class="section__option" value="Cluster">Cluster</option>
@@ -163,7 +163,7 @@
               <option class="section__option" value="Consciousness">Consciousness</option>
               <option class="section__option" value="Memory">Memory</option>
             </select>
-            <select class="section-filter__element filter-dimension hidden">
+            <select class="section-filter__element filter-dimension hidden" id="dimension">
               <option class="section__option" value="Type" disabled selected>Dimension</option>
               <option class="section__option" value="Dimension C-137">Dimension C-137</option>
               <option class="section__option" value="unknown">unknown</option>
@@ -198,17 +198,17 @@
               <option class="section__option" value="Magic Dimension">Magic Dimension</option>
               <option class="section__option" value="Merged Dimension">Merged Dimension</option>
             </select>
-            <input class="section-filter__element filter-episode hidden" placeholder="Filter by episode..." type="text">
+            <input class="section-filter__element filter-episode hidden" placeholder="Filter by episode..." id="episode" type="text">
           </div>
         </div>
-        <div class="section__content section__child ">
+        <div class="section-content section__child ">
           <div class="section-content__container">
           </div>
-          <div class="section__buttons">
-            <button class="btn-reset section__btn  previous">Previous</button>
-            <button class="btn-reset section__btn more">Load More</button>
-            <button class="btn-reset section__btn less">Show Less</button>
-            <button class="btn-reset section__btn next">Next</button>
+          <div class="section-buttons">
+            <button class="btn-reset section-buttons__btn  previous">Previous</button>
+            <button class="btn-reset section-buttons__btn more">Load More</button>
+            <button class="btn-reset section-buttons__btn less">Show Less</button>
+            <button class="btn-reset section-buttons__btn next">Next</button>
           </div>
         </div>
         <div class="section-resource__container"></div>

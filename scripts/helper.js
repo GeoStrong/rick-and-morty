@@ -31,7 +31,7 @@ export const getData = async function (url) {
 };
 
 export const displayCard = function (property = 'block', container) {
-  const sectionCard = container.querySelectorAll('.section__card');
+  const sectionCard = container.querySelectorAll('.section-card');
   sectionCard.forEach((card) => {
     if (+card.dataset.number > 10) {
       displayElement(card, property);
@@ -48,8 +48,9 @@ export const renderError = function (container, message) {
   const html = `
     <div class="section__error">
       <h2 class="section__message">
-        TRY ANOTHER NAME! ERROR ${message}
+        NOTHING FOUND ${message}
       </h2>
+      <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
     </div>
   `;
   container.insertAdjacentHTML('beforeend', html);
@@ -66,15 +67,15 @@ const renderLoading = function (container) {
 
 const generateCharacterMarkup = function (result, index, container) {
   const html = `
-          <div class="section__card removable" data-number=${index + 1} id=${
+          <div class="section-card removable" data-number=${index + 1} id=${
     result.id
   }>
-              <div class="section__background-img">
+              <div class="section-card__background-img">
                 <img src="${result.image}" alt="background-image">
               </div>
-              <div class="section__description">
-                <h2 class="section__name">${result.name}</h2>
-                <p class="section__paragraph">${result.species}</p>
+              <div class="section-card__description">
+                <h2 class="section-card__name">${result.name}</h2>
+                <p class="section-card__paragraph">${result.species}</p>
               </div>
           </div>
         `;
@@ -83,12 +84,12 @@ const generateCharacterMarkup = function (result, index, container) {
 
 export const generateLocationMarkup = function (result, index, container) {
   const html = `
-          <div class="section__card location-card" data-number=${
-            index + 1
-          } id=${result.id}>
+          <div class="section-card location-card" data-number=${index + 1} id=${
+    result.id
+  }>
             <div class="section-card__location">
-              <h2 class="section__name">${result.name}</h2>
-              <p class="section__paragraph">${result.dimension}</p>
+              <h2 class="section-card__name">${result.name}</h2>
+              <p class="section-card__paragraph">${result.dimension}</p>
             </div>
           </div>
         `;
@@ -97,13 +98,13 @@ export const generateLocationMarkup = function (result, index, container) {
 
 const generateEpisodeMarkup = function (result, index, container) {
   const html = `
-          <div class="section__card episode-card" data-number=${index + 1} id=${
+          <div class="section-card episode-card" data-number=${index + 1} id=${
     result.id
   }>
             <div class="section-card__episode">
-              <h2 class="section__name">${result.name}</h2>
-              <p class="section__paragraph">${result.air_date}</p>
-              <p class="section__episode">${result.episode}</p>
+              <h2 class="section-card__name">${result.name}</h2>
+              <p class="section-card__paragraph">${result.air_date}</p>
+              <p class="section-card__episode">${result.episode}</p>
             </div>
           </div>
         `;

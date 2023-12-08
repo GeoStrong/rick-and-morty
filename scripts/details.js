@@ -19,14 +19,14 @@ const getEpisodes = async function (ep) {
     const data = await helper.getData(ep);
     return `
     <div class="section-character__series section-character__follow">
-      <a href="#${data.url.split('api/')[1]}" target=_blank>
-        <h4 class="section-series__header">
+      <a href="#${data.url.split('api/')[1]}">
+        <h4 class="section-character__series--header">
         ${data.episode}
         </h4>
-        <p class="section-series__title">
+        <p class="section-character__series--title">
           ${data.name}
         </p>
-        <p class="section-series__date">
+        <p class="section-character__series--date">
           ${data.air_date}
         </p>
       </a>
@@ -41,8 +41,8 @@ const getEpisodes = async function (ep) {
 const generateCharacterMarkup = async function (result, index, container) {
   try {
     const html = `
-      <div class="section__character removable" id="${index}">
-        <div class="section__first">
+      <div class="section-character removable" id="${index}">
+        <div class="section-character__first">
           <div class="section-character__profile">
             <div class="section-character__avatar" style="background-image: url(${
               result.image
@@ -55,29 +55,35 @@ const generateCharacterMarkup = async function (result, index, container) {
           <div class="section-character__information">
             <h3 class="section__header">Informations</h3>
             <div class="section-character__info">
-              <h4 class="section-info__header">Gender</h4>
-              <p class="section-info__description">${result.gender}</p>
+              <h4 class="section-character__info--header">Gender</h4>
+              <p class="section-character__info--description">${
+                result.gender
+              }</p>
             </div>
             <div class="section-character__info">
-              <h4 class="section-info__header">Specie</h4>
-              <p class="section-info__description">${result.species}</p>
+              <h4 class="section-character__info--header">Species</h4>
+              <p class="section-character__info--description">${
+                result.species
+              }</p>
             </div>
             <div class="section-character__info">
-              <h4 class="section-info__header">Origin</h4>
-              <p class="section-info__description">${result.origin.name}</p>
+              <h4 class="section-character__info--header">Origin</h4>
+              <p class="section-character__info--description">${
+                result.origin.name
+              }</p>
             </div>
             <div class="section-character__info">
-              <h4 class="section-info__header">Type</h4>
-              <p class="section-info__description">${
+              <h4 class="section-character__info--header">Type</h4>
+              <p class="section-character__info--description">${
                 result.type ? result.type : 'unknown'
               }</p>
             </div>
             <div class="section-character__info section-character__follow">
-              <a href="#${
-                result.location.url.split('api/')[1]
-              }" target="_blank">
-                <h4 class="section-info__header">Location</h4>
-                <p class="section-info__description">${result.location.name}</p>
+              <a href="#${result.location.url.split('api/')[1]}" >
+                <h4 class="section-character__info--header">Location</h4>
+                <p class="section-character__info--description">${
+                  result.location.name
+                }</p>
               </a>  
             </div>
           </div>
@@ -103,26 +109,26 @@ const generateResourceMarkup = async function (
   resource = 'location'
 ) {
   const html = `
-    <div class="section__resource ${
+    <div class="section-resource ${
       resource === 'location' ? 'location' : 'episode'
     } removable" id="${index}">
-      <div class="section__first--resource">
+      <div class="section-resource__row">
         <h2 class="section-resource__name section-resource__name--title">${
           result.name
         }</h2>
         <div class="section-resource__first">
-          <h4 class="section-info__header">${
+          <h4 class="section-character__info--header">${
             resource === 'location' ? 'Type' : 'Episode'
           }</h4>
-          <p class="section-info__description">${
+          <p class="section-character__info--description">${
             resource === 'location' ? result.type : result.episode
           }</p>
         </div>
         <div class="section-resource__second">
-          <h4 class="section-info__header">${
+          <h4 class="section-character__info--header">${
             resource === 'location' ? 'Dimension' : 'Date'
           }</h4>
-          <p class="section-info__description">${
+          <p class="section-character__info--description">${
             resource === 'location' ? result.dimension : result.air_date
           }</p>
         </div>
@@ -204,7 +210,7 @@ sectionContainer.addEventListener('click', async function (event) {
     let card;
     let hash;
     if (url === url) {
-      card = event.target.closest('.section__card');
+      card = event.target.closest('.section-card');
       hash = 'character';
     }
     if (window.location.hash.includes('location')) {
@@ -237,10 +243,9 @@ btnBack.addEventListener('click', function () {
 });
 
 resourceContainer.addEventListener('click', function (event) {
-  const card = event.target.closest('.section__card');
+  const card = event.target.closest('.section-card');
   if (!card) return;
   window.location.hash = `${CHARACTER_URL.replace('?', '')}${card.id}`;
-  window.location.reload();
 });
 
 window.addEventListener('load', async function () {
@@ -253,4 +258,9 @@ window.addEventListener('load', async function () {
     getEpisodeURL();
   }
   displayFullInfo(url, id.split('/')[1], sectionContainer);
+});
+
+window.addEventListener('hashchange', () => {
+  if (location.hash.includes('?')) return;
+  window.location.reload();
 });

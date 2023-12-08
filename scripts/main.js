@@ -4,25 +4,17 @@ import * as helper from './helper.js';
 import * as filter from './filter.js';
 
 const header = document.querySelector('.header');
-const sectionImageContainer = document.querySelector('.section__image');
 const characterContainer = document.querySelector(
   '.section-content__container'
 );
-const headerLinks = document.querySelectorAll('a');
 const btnPrevious = document.querySelector('.previous');
 const btnNext = document.querySelector('.next');
 const btnMore = document.querySelector('.more');
 const btnLess = document.querySelector('.less');
 let resource = CHARACTER_URL;
 let url = `${API_URL}${resource}`;
-
-headerLinks.forEach((link) =>
-  link.addEventListener('click', function () {
-    setTimeout(() => {
-      location.reload();
-    }, 0);
-  })
-);
+let filterObject = {};
+let filterUrl = '';
 
 const getLocationURL = function () {
   resource = LOCATION_URL;
@@ -41,16 +33,46 @@ filter.filterData.forEach((selectOption) => {
         selectOption[1] === 'species' ||
         selectOption[1] === 'gender' ||
         selectOption[1] === 'status'
-      )
+      ) {
         resource = CHARACTER_URL;
+        filterObject = {
+          name: filterObject.name,
+          species: filterObject.species,
+          gender: filterObject.gender,
+          status: filterObject.status,
+        };
+      }
 
-      if (selectOption[1] === 'type' || selectOption[1] === 'dimension')
+      if (selectOption[1] === 'type' || selectOption[1] === 'dimension') {
         resource = LOCATION_URL;
+        filterObject = {
+          name: filterObject.name,
+          type: filterObject.type,
+          dimension: filterObject.dimension,
+        };
+      }
 
-      if (selectOption[1] === 'episode') resource = EPISODE_URL;
+      if (selectOption[1] === 'episode') {
+        resource = EPISODE_URL;
+        filterObject = {
+          name: filterObject.name,
+          episode: filterObject.episode,
+        };
+      }
+
       url = `${API_URL}${resource}`;
       const option = event.target.value;
-      const newUrl = `${API_URL}${resource}${selectOption[1]}=${option}`;
+      filterObject[event.target.id] = option;
+
+      console.log(event.target);
+
+      filterUrl = Object.entries(filterObject)
+        .flatMap((entry) => {
+          return entry[1] ? `${entry[0]}=${entry[1]}&` : [];
+        })
+        .join('');
+
+      const newUrl = `${API_URL}${resource}${filterUrl}`;
       const data = await helper.getData(newUrl);
       if (!data) return;
       helper.getHash(`${newUrl}`);
