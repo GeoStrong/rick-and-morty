@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/style.css">
-  <!-- <link rel="stylesheet" href="./css/media.css"> -->
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@700&family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet">
   <script defer src="./scripts/main.js" type="module"></script>
@@ -88,7 +87,7 @@
         </div>
         <div class="section-filter section__child ">
           <div class="section-filter__container">
-            <input class="section-filter__element filter-name" placeholder="Filter by name..." id="name" type="text">
+            <input class="section-filter__element section-filter__element--search filter-name" placeholder="Filter by name..." id="name" type="text">
             <select class="section-filter__element filter-species" id="species">
               <option class="section__option" value="Species" disabled selected>Species</option>
               <option class="section__option" value="Human">Human</option>
@@ -198,7 +197,7 @@
               <option class="section__option" value="Magic Dimension">Magic Dimension</option>
               <option class="section__option" value="Merged Dimension">Merged Dimension</option>
             </select>
-            <input class="section-filter__element filter-episode hidden" placeholder="Filter by episode..." id="episode" type="text">
+            <input class="section-filter__element section-filter__element--search filter-episode hidden" placeholder="Filter by episode..." id="episode" type="text">
           </div>
         </div>
         <div class="section-content section__child ">

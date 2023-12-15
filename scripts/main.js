@@ -127,6 +127,7 @@ const filterAction = function (filterContainer, action) {
 ['load', 'hashchange'].forEach((event) =>
   window.addEventListener(event, async function () {
     try {
+      helper.renderLoading(characterContainer);
       const { hash } = window.location;
       if (
         hash.includes('location') ||

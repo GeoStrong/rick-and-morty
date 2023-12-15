@@ -48,19 +48,29 @@ export const renderError = function (container, message) {
   const html = `
     <div class="section__error">
       <h2 class="section__message">
-        NOTHING FOUND ${message}
+        ${
+          message === 'Failed to fetch'
+            ? 'Failed to retrieve data'
+            : 'NOTHING FOUND'
+        }
       </h2>
-      <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
+      <p>
+        ${
+          message === 'Failed to fetch'
+            ? 'Please check your connection and try again.'
+            : 'Sorry, but nothing matched your search terms. Please try again with some different keywords.        '
+        }
+      </p>
     </div>
   `;
   container.insertAdjacentHTML('beforeend', html);
 };
 
-const renderLoading = function (container) {
+export const renderLoading = function (container) {
   const html = `
-    <div class="loading">
-      <img src="./images/loading.svg" alt="loading">
-    </div>
+      <div class="loader-container">
+        <div class="loading-spinner"></div>
+      </div>
   `;
   container.insertAdjacentHTML('beforeend', html);
 };
@@ -118,9 +128,8 @@ export const displayData = async function (
   action = true
 ) {
   try {
-    renderLoading(container);
-    clear(container);
     const data = await result;
+    clear(container);
     data.results.forEach((result, index) => {
       if (resource === CHARACTER_URL)
         generateCharacterMarkup(result, index, container);
