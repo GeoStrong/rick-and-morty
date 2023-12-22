@@ -73,8 +73,6 @@
       <section class="section">
         <div class="section__image section__child ">
           <img src="./images/character-image.png" class="character-image" alt="character-image">
-          <img src="./images/location-image.png" class="location-image hidden" alt="location-image">
-          <img src="./images/episode-image.png" class="episode-image hidden" alt="episode-image">
         </div>
         <div class="section-character__back">
           <button class="btn-reset section-character__btn back hidden">
@@ -86,7 +84,7 @@
           </button>
         </div>
         <div class="section-filter section__child ">
-          <div class="section-filter__container">
+          <form class="section-filter__container">
             <input class="section-filter__element section-filter__element--search filter-name" placeholder="Filter by name..." id="name" type="text">
             <select class="section-filter__element filter-species" id="species">
               <option class="section__option" value="Species" disabled selected>Species</option>
@@ -198,7 +196,7 @@
               <option class="section__option" value="Merged Dimension">Merged Dimension</option>
             </select>
             <input class="section-filter__element section-filter__element--search filter-episode hidden" placeholder="Filter by episode..." id="episode" type="text">
-          </div>
+          </form>
         </div>
         <div class="section-content section__child ">
           <div class="section-content__container">

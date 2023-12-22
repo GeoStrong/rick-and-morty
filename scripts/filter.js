@@ -20,3 +20,13 @@ export const filterData = [
   [filterEpisode, 'episode'],
   [filterName, 'name'],
 ];
+
+[filterName, filterEpisode].forEach((filter) => {
+  filter.addEventListener('focus', () => {
+    filter.style.boxShadow =
+      '5px 5px 5px rgba(0, 0, 0, 0.2), 5px 5px 5px rgba(0, 0, 0, 0.12)';
+  });
+  filter.addEventListener('blur', () => {
+    filter.style.boxShadow = 'none';
+  });
+});

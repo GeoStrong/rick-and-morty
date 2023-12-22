@@ -15,19 +15,34 @@ let resource = CHARACTER_URL;
 let url = `${API_URL}${resource}`;
 let filterObject = {};
 let filterUrl = '';
+let errorStatus = {};
 
-const getLocationURL = function () {
+let errorProxy = new Proxy(errorStatus, {
+  set: function (target, key, value) {
+    if (value.includes('404')) hideButtonsOnError();
+    return true;
+  },
+});
+
+function hideButtonsOnError() {
+  helper.displayElement(btnMore, 'none');
+  helper.displayElement(btnLess, 'none');
+  helper.displayElement(btnNext, 'none');
+  helper.displayElement(btnPrevious, 'none');
+}
+
+const getLocationURL = () => {
   resource = LOCATION_URL;
   url = `${API_URL}${resource}`;
 };
 
-const getEpisodeURL = function () {
+const getEpisodeURL = () => {
   resource = EPISODE_URL;
   url = `${API_URL}${resource}`;
 };
 
 filter.filterData.forEach((selectOption) => {
-  selectOption[0].addEventListener('change', async function (event) {
+  selectOption[0].addEventListener('change', async (event) => {
     try {
       if (
         selectOption[1] === 'species' ||
@@ -64,8 +79,6 @@ filter.filterData.forEach((selectOption) => {
       const option = event.target.value;
       filterObject[event.target.id] = option;
 
-      console.log(event.target);
-
       filterUrl = Object.entries(filterObject)
         .flatMap((entry) => {
           return entry[1] ? `${entry[0]}=${entry[1]}&` : [];
@@ -79,6 +92,7 @@ filter.filterData.forEach((selectOption) => {
       helper.displayData(characterContainer, data, resource);
       return (url = `${newUrl}&`);
     } catch (error) {
+      errorProxy.message = error.message;
       helper.renderError(characterContainer, error.message);
     }
   });
@@ -92,7 +106,7 @@ const filterCharacter = [
 const filterLocation = [filter.filterType, filter.filterDimension];
 const filterEpisode = [filter.filterEpisode];
 
-const filterAction = function (filterContainer, action) {
+const filterAction = (filterContainer, action) => {
   filterContainer.forEach((filter) => {
     if (action === 'show') filter.classList.remove('hidden');
     if (action === 'hide') filter.classList.add('hidden');
@@ -125,7 +139,7 @@ const filterAction = function (filterContainer, action) {
 });
 
 ['load', 'hashchange'].forEach((event) =>
-  window.addEventListener(event, async function () {
+  window.addEventListener(event, async () => {
     try {
       helper.renderLoading(characterContainer);
       const { hash } = window.location;

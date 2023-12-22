@@ -5,3 +5,4 @@ export const CHARACTER_URL = 'character/?';
 export const LOCATION_URL = 'location/?';
 export const EPISODE_URL = 'episode/?';
 export const HASH_SLICE = 1;
+export const DATA_PER_PAGE = 10;

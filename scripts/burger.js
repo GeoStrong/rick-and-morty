@@ -7,7 +7,7 @@ const hamburgerButtons = document.querySelectorAll('.hamburger__btn');
 const menu = document.querySelector('.menu');
 const overlay = document.querySelector('.overlay');
 
-hamburger.addEventListener('click', function () {
+hamburger.addEventListener('click', () => {
   menu.classList.toggle('active');
   hamburgerButtons.forEach((btn) => btn.classList.toggle('hidden'));
   list.style.display = 'flex';

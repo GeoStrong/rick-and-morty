@@ -14,7 +14,7 @@ const locationData = {
 };
 let url = `${API_URL}${CHARACTER_URL.replace('?', '')}`;
 
-const getEpisodes = async function (ep) {
+const getEpisodes = async (ep) => {
   try {
     const data = await helper.getData(ep);
     return `
@@ -38,7 +38,7 @@ const getEpisodes = async function (ep) {
   }
 };
 
-const generateCharacterMarkup = async function (result, index, container) {
+const generateCharacterMarkup = async (result, index, container) => {
   try {
     const html = `
       <div class="section-character removable" id="${index}">
@@ -141,22 +141,22 @@ const generateResourceMarkup = async function (
   container.insertAdjacentHTML('afterbegin', html);
 };
 
-const getLocationURL = function () {
+const getLocationURL = () => {
   url = `${API_URL}${LOCATION_URL.replace('?', '')}`;
 };
 
-const getEpisodeURL = function () {
+const getEpisodeURL = () => {
   url = `${API_URL}${EPISODE_URL.replace('?', '')}`;
 };
 
-const displayChildElements = function (action) {
+const displayChildElements = (action) => {
   childElements.forEach((child) => {
     if (action === 'hide') child.classList.add('hidden');
     if (action === 'show') child.classList.remove('hidden');
   });
 };
 
-const deleteChild = function (container) {
+const deleteChild = (container) => {
   const removableElement = container.querySelectorAll('.removable');
   removableElement.forEach((element) => {
     const parent = element.parentNode;
@@ -164,7 +164,7 @@ const deleteChild = function (container) {
   });
 };
 
-const displayAllCharacters = async function (result, container) {
+const displayAllCharacters = async (result, container) => {
   let characters;
   if (result.residents) characters = result.residents;
   if (result.characters) characters = result.characters;
@@ -182,7 +182,7 @@ const displayAllCharacters = async function (result, container) {
   }
 };
 
-const displayFullInfo = async function (url, id, container) {
+const displayFullInfo = async (url, id, container) => {
   try {
     if (!id || !isFinite(id)) return;
     const data = await helper.getData(`${url}${id}`);
@@ -205,7 +205,7 @@ const displayFullInfo = async function (url, id, container) {
   }
 };
 
-sectionContainer.addEventListener('click', async function (event) {
+sectionContainer.addEventListener('click', async (event) => {
   try {
     let card;
     let hash;
@@ -232,7 +232,7 @@ sectionContainer.addEventListener('click', async function (event) {
   }
 });
 
-btnBack.addEventListener('click', function () {
+btnBack.addEventListener('click', () => {
   window.history.back();
   deleteChild(sectionContainer);
   displayChildElements('show');
@@ -242,13 +242,13 @@ btnBack.addEventListener('click', function () {
   resourceContainer?.removeChild(removeEmpty);
 });
 
-resourceContainer.addEventListener('click', function (event) {
+resourceContainer.addEventListener('click', (event) => {
   const card = event.target.closest('.section-card');
   if (!card) return;
   window.location.hash = `${CHARACTER_URL.replace('?', '')}${card.id}`;
 });
 
-window.addEventListener('load', async function () {
+window.addEventListener('load', async () => {
   const id = window.location.hash.split('#')[1];
   if (!id) return;
   if (id.includes('location')) {

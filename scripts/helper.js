@@ -5,21 +5,24 @@ import {
   CHARACTER_URL,
   LOCATION_URL,
   EPISODE_URL,
+  DATA_PER_PAGE,
 } from './config.js';
 
-const timeout = function (s) {
+const timeout = (second) => {
   try {
-    return new Promise(function (_, reject) {
-      setTimeout(function () {
-        reject(new Error(`Request took too long! Timeout after ${s} second`));
-      }, s * 1000);
+    return new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(
+          new Error(`Request took too long! Timeout after ${second} second`)
+        );
+      }, second * 1000);
     });
   } catch (error) {
     throw error;
   }
 };
 
-export const getData = async function (url) {
+export const getData = async (url) => {
   try {
     const response = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);
     if (!response.ok) throw new Error(`(${response.status})`);
@@ -30,20 +33,20 @@ export const getData = async function (url) {
   }
 };
 
-export const displayCard = function (property = 'block', container) {
+export const displayCard = (property = 'block', container) => {
   const sectionCard = container.querySelectorAll('.section-card');
   sectionCard.forEach((card) => {
-    if (+card.dataset.number > 10) {
+    if (+card.dataset.number > DATA_PER_PAGE) {
       displayElement(card, property);
     }
   });
 };
 
-const clear = function (container) {
+const clear = (container) => {
   container.innerHTML = '';
 };
 
-export const renderError = function (container, message) {
+export const renderError = (container, message) => {
   clear(container);
   const html = `
     <div class="section__error">
@@ -66,7 +69,7 @@ export const renderError = function (container, message) {
   container.insertAdjacentHTML('beforeend', html);
 };
 
-export const renderLoading = function (container) {
+export const renderLoading = (container) => {
   const html = `
       <div class="loader-container">
         <div class="loading-spinner"></div>
@@ -75,7 +78,7 @@ export const renderLoading = function (container) {
   container.insertAdjacentHTML('beforeend', html);
 };
 
-const generateCharacterMarkup = function (result, index, container) {
+const generateCharacterMarkup = (result, index, container) => {
   const html = `
           <div class="section-card removable" data-number=${index + 1} id=${
     result.id
@@ -92,7 +95,7 @@ const generateCharacterMarkup = function (result, index, container) {
   container.insertAdjacentHTML('beforeend', html);
 };
 
-export const generateLocationMarkup = function (result, index, container) {
+export const generateLocationMarkup = (result, index, container) => {
   const html = `
           <div class="section-card location-card" data-number=${index + 1} id=${
     result.id
@@ -106,7 +109,7 @@ export const generateLocationMarkup = function (result, index, container) {
   container.insertAdjacentHTML('beforeend', html);
 };
 
-const generateEpisodeMarkup = function (result, index, container) {
+const generateEpisodeMarkup = (result, index, container) => {
   const html = `
           <div class="section-card episode-card" data-number=${index + 1} id=${
     result.id
@@ -121,12 +124,12 @@ const generateEpisodeMarkup = function (result, index, container) {
   container.insertAdjacentHTML('beforeend', html);
 };
 
-export const displayData = async function (
+export const displayData = async (
   container,
   result,
   resource = CHARACTER_URL,
   action = true
-) {
+) => {
   try {
     const data = await result;
     clear(container);
@@ -144,12 +147,12 @@ export const displayData = async function (
   }
 };
 
-export const getHash = function (url) {
+export const getHash = (url) => {
   let number = url.split('api/');
   window.location.hash = number[1];
 };
 
-const handleData = async function (direction = '', url) {
+const handleData = async (direction = '', url) => {
   try {
     const data = await getData(url);
     if (direction === 'next' && data.info.next !== null) {
@@ -166,26 +169,26 @@ const handleData = async function (direction = '', url) {
   }
 };
 
-export const getPageNumber = function (element) {
+export const getPageNumber = (element) => {
   let page;
   if (element) page = element.window.location.hash;
   if (!element) page = window.location.hash;
   return page.slice(HASH_SLICE).split('?')[1];
 };
 
-export const btnMovement = function (direction, container, url) {
+export const btnMovement = (direction, container, url) => {
   displayData(container, handleData(direction, `${url}${getPageNumber()}`));
 };
 
-export const scrollTo = function (element) {
+export const scrollTo = (element) => {
   element.scrollIntoView({ behavior: 'smooth' });
 };
 
-export const displayElement = function (element, property) {
+export const displayElement = (element, property) => {
   element.style.display = property;
 };
 
-export const getBtnInfo = async function (url, btnNext, btnPrevious) {
+export const getBtnInfo = async (url, btnNext, btnPrevious) => {
   const newUrl = `${url}${getPageNumber()}`;
   const data = await getData(newUrl);
   if (!data.info.prev) {
